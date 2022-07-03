@@ -1,7 +1,7 @@
-[![Python application test with Github Actions](https://github.com/hoanhtung/C2-AgileDevelopmentwithAzure/actions/workflows/pythonapp.yml/badge.svg)](https://github.com/hoanhtung/C2-AgileDevelopmentwithAzure/actions/workflows/pythonapp.yml)
+[![Python application test with Github Actions](https://github.com/hoanhtung/udacity-building-ci-cd-pipeline/actions/workflows/pythonapp.yml/badge.svg)](https://github.com/hoanhtung/udacity-building-ci-cd-pipeline/actions/workflows/pythonapp.yml)
 
 # Overview
-For this project, you will set up Azure Pipelines to deploy the Flask ML Service Project to Azure App Service
+For this project, you will do CI/CD with GitHub Actions and Azure Pipeline. Especially, you will set up Azure Pipelines to deploy the Flask ML Service Project to Azure App Service.
 
 ## Project Plan
 

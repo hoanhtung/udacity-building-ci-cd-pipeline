@@ -88,8 +88,7 @@ source ~/.my-venv/bin/activate
 ## Enhancements
 
 In the future, I think the repository will be large, so I want to reduce checkout time, limit how far back in history to download.
-It is possible to specify fetchDepth to do a [shallow fetch](https://docs.microsoft.com/en-us/azure/devops/pipelines/repos/pipeline-options-for-git?view=azure-devops&tabs=yaml#shallow-fetch) which could improve performance
-and also help you conserve network and storage resources. It might also save time.
+It is good approach to use fetchDepth to do a [shallow fetch](https://docs.microsoft.com/en-us/azure/devops/pipelines/repos/pipeline-options-for-git?view=azure-devops&tabs=yaml#shallow-fetch) which could improve performance and also help you conserve network and storage resources.
 
 ## Demo 
 [Demo on Youtube](https://youtu.be/Hu058Zl8rWg)

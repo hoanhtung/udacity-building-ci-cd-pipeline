@@ -14,60 +14,82 @@ For this project, you will do CI/CD with GitHub Actions and Azure Pipeline. Espe
 * Create a [GitHub Account](https://github.com/)
 
 ## Instructions
-![](demo-pictures/architectural-diagram.png)
+![](images/architectural-diagram.png)
 Architectural Diagram
 
-* Project running on Azure App Service
 ### Set up Azure Cloud Shell
 1. Access to Azure Portal page & open Azure Cloud Shell
 
-![](images/Screen Shot 2022-07-03 at 01.10.25.png)
+![](images/az-cloud-shell.png)
 
 2. Generate ssh-keys by running `ssh-keygen -t rsa` cmd
 3. Copy the value of ssh-keys by running `cat [root]/.ssh/id_rsa.pub` cmd (root here is `/home/odl_user`)
 
-![](images/Screen Shot 2022-07-03 at 01.24.12.png)
+![](images/ssh-keygen.png)
 
-4. Navigate to [SSH and GPG keys](https://github.com/settings/keys) and upload ssh-keys to GitHub
+4. Navigate to [SSH and GPG keys](https://github.com/settings/keys) and upload ssh-keys (copied value) to GitHub
 
-![](images/Screen Shot 2022-07-03 at 01.33.14.png)
+![](images/ssh-keys.png)
 ### Clone the project repo into Azure Cloud Shell
 1. After add SSH key to GitHub, let's run the cmd below in Azure Cloud Shell to clone the project repo:
 ```
 git clone git@github.com:hoanhtung/udacity-building-ci-cd-pipeline.git
 ```
-![](images/Screen Shot 2022-07-03 at 01.48.57.png)
+![](images/clone-project.png)
 ### Run Makefile
 1. (Optional) Set up virtual environment
 ```
 python3 -m venv ~/.my-venv
 source ~/.my-venv/bin/activate
 ```
-2. Run `make all` cmd to install libraries in `requirements.txt` file, run pylint and pytest
-![](images/p4.png)
+2. Access to project folder
+3. Run `make all` cmd to install libraries in `requirements.txt` file, run pylint and pytest
 
-### Deploy Azure App Service
-* Successful deploy of the project in Azure Pipelines.  [Note the official documentation should be referred to and double checked as you setup CI/CD](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/python-webapp?view=azure-devops).
+![](images/run-makefile.png)
 
-* Running Azure App Service from Azure Pipelines automatic deployment
+### Deploy to Azure App Service
+1. Assign values of service app into parameters `--name`, `--resource-group`, `--location`, `--sku` in `commands.sh` file
+2. Run `./commands.sh` to deploy the project to Azure App Service
+3. After deploying is successful, we can access to home page of web app service. Output here:
 
-* Successful prediction from deployed flask app in Azure Cloud Shell.  [Use this file as a template for the deployed prediction](https://github.com/udacity/nd082-Azure-Cloud-DevOps-Starter-Code/blob/master/C2-AgileDevelopmentwithAzure/project/starter_files/flask-sklearn/make_predict_azure_app.sh).
-The output should look similar to this:
+![](images/web-app-page.png)
 
-```bash
-udacity@Azure:~$ ./make_predict_azure_app.sh
-Port: 443
-{"prediction":[20.35373177134412]}
-```
+### Test run using GitHub Action
 
-* Output of streamed log files from deployed application
+1. Output of the test run on GitHub Action:
 
-> 
+![](images/github-action-test-run.png)
 
+### Set up Azure Pipelines
+1. [Create an Azure DevOps project and connect to Azure](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/python-webapp?view=azure-devops#create-an-azure-devops-project-and-connect-to-azure)
+2. [Use CI/CD to deploy a Python web app to Azure App Service on Linux](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/python-webapp?view=azure-devops#create-a-python-specific-pipeline-to-deploy-to-app-service)
+3. [Run the Azure pipeline](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/python-webapp?view=azure-devops#run-the-pipeline) and output after deploying successfully:
+
+![](images/az-pipelines-output.png)
+
+4. Access to Deployment Center page in the Azure portal to view deployment histories
+
+![](images/deployment-center.png)
+
+5. We can see the streamed log of the application in Log Stream menu 
+
+![](images/log-stream.png)
+
+6. Run `./make_predict_azure_app.sh` cmd to test the Predict API and output here:
+
+![](images/make-predict.png)
+
+### Locust load test
+![](images/locust-1.png)
+
+![](images/locust-2.png)
+
+![](images/locust-3.png)
 ## Enhancements
 
-<TODO: A short description of how to improve the project in the future>
+In the future, I think the repository will be large, so I want to reduce checkout time, limit how far back in history to download.
+It is possible to specify fetchDepth to do a [shallow fetch](https://docs.microsoft.com/en-us/azure/devops/pipelines/repos/pipeline-options-for-git?view=azure-devops&tabs=yaml#shallow-fetch) which could improve performance
+and also help you conserve network and storage resources. It might also save time.
 
 ## Demo 
-
-<TODO: Add link Screencast on YouTube>
+[Demo on Youtube](https://youtu.be/Hu058Zl8rWg)
